@@ -1,0 +1,14 @@
+[project]
+name = "iot-research"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ipykernel>=7.1.0",
+    "optuna>=4.6.0",
+    "pandas>=2.3.3",
+    "psycopg2>=2.9.11",
+    "scikit-learn>=1.8.0",
+    "sqlalchemy>=2.0.45",
+]
