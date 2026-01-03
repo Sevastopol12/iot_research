@@ -1,5 +1,6 @@
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
-from sqlalchemy import Integer, Float, String
+from sqlalchemy import Integer, Float, String, DateTime
+from datetime import datetime
 
 
 class Base(DeclarativeBase):
@@ -15,35 +16,48 @@ class CropObservation(Base):
         primary_key=True,
         autoincrement=True,
     )
-    
 
-    # Sensors
-    temperature: Mapped[float] = mapped_column(Float, nullable=False)
-    humidity: Mapped[float] = mapped_column(Float, nullable=False)
-    rainfall: Mapped[float] = mapped_column(Float, nullable=False)
-    wind_speed: Mapped[float] = mapped_column(Float, nullable=False)
+    # Time series
+    timestamp: Mapped[datetime] = mapped_column(
+        DateTime, nullable=False, name="timestamp"
+    )
+    plant_id: Mapped[int] = mapped_column(Integer, nullable=False, name="plant_id")
 
-    # Handheld devices
-    chlorophyll_content: Mapped[float] = mapped_column(Float, nullable=False)
-    soil_moisture: Mapped[float] = mapped_column(Float, nullable=False)
-    soil_ph: Mapped[float] = mapped_column(Float, nullable=False)
-    
-    # Lab devices
-    organic_matter: Mapped[float] = mapped_column(Float, nullable=False)
+    # env_features
+    soil_moisture: Mapped[float] = mapped_column(
+        Float, nullable=False, name="soil_moisture"
+    )
+    ambient_temperature: Mapped[float] = mapped_column(
+        Float, nullable=False, name="ambient_temperature"
+    )
+    soil_temperature: Mapped[float] = mapped_column(
+        Float, nullable=False, name="soil_temperature"
+    )
+    humidity: Mapped[float] = mapped_column(Float, nullable=False, name="humidity")
+    light_intensity: Mapped[float] = mapped_column(
+        Float, nullable=False, name="light_intensity"
+    )
 
-    # Output from image-devices    
-    pest_damage: Mapped[int] = mapped_column(Integer, nullable=False)
-    pest_hotspots: Mapped[int] = mapped_column(Integer, nullable=False)
-    crop_growth_stage: Mapped[int] = mapped_column(Integer, nullable=False)
-    
-    # Satellite / bird-eye view images
-    weed_coverage: Mapped[float] = mapped_column(Float, nullable=False)
-    canopy_coverage: Mapped[float] = mapped_column(Float, nullable=False)
-    leaf_area_index: Mapped[float] = mapped_column(Float, nullable=False)
+    # soil_features
+    soil_ph: Mapped[float] = mapped_column(Float, nullable=False, name="soil_ph")
+    nitrogen_level: Mapped[float] = mapped_column(
+        Float, nullable=False, name="nitrogen_level"
+    )
+    phosphorus_level: Mapped[float] = mapped_column(
+        Float, nullable=False, name="phosphorus_level"
+    )
+    potassium_level: Mapped[float] = mapped_column(
+        Float, nullable=False, name="potassium_level"
+    )
 
-    # Category
-    crop_type: Mapped[str] = mapped_column(String(50), nullable=False)
-
+    # phys_features
+    chlorophyll_content: Mapped[float] = mapped_column(
+        Float, nullable=False, name="chlorophyll_content"
+    )
+    electrochemical_signal: Mapped[float] = mapped_column(
+        Float, nullable=False, name="electrochemical_signal"
+    )
     # Label
-    crop_stress_indicator: Mapped[int] = mapped_column(Integer, nullable=False)
-
+    plant_health_status: Mapped[str] = mapped_column(
+        String(50), nullable=False, name="plant_health_status"
+    )

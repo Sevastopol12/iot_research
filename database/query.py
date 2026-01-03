@@ -23,22 +23,20 @@ def load_csv(
             for row in reader:
                 batch.append(
                     {
-                        "canopy_coverage": float(row["Canopy_Coverage"]),
-                        "chlorophyll_content": float(row["Chlorophyll_Content"]),
-                        "leaf_area_index": float(row["Leaf_Area_Index"]),
-                        "temperature": float(row["Temperature"]),
-                        "humidity": float(row["Humidity"]),
-                        "rainfall": float(row["Rainfall"]),
-                        "wind_speed": float(row["Wind_Speed"]),
+                        "timestamp": pd.to_datetime(row["Timestamp"]).to_pydatetime(),
+                        "plant_id": int(row["Plant_ID"]),
                         "soil_moisture": float(row["Soil_Moisture"]),
+                        "ambient_temperature": float(row["Ambient_Temperature"]),
+                        "soil_temperature": float(row["Soil_Temperature"]),
+                        "humidity": float(row["Humidity"]),
+                        "light_intensity": float(row["Light_Intensity"]),
                         "soil_ph": float(row["Soil_pH"]),
-                        "organic_matter": float(row["Organic_Matter"]),
-                        "weed_coverage": float(row["Weed_Coverage"]),
-                        "pest_damage": int(row["Pest_Damage"]),
-                        "pest_hotspots": int(row["Pest_Hotspots"]),
-                        "crop_growth_stage": int(row["Crop_Growth_Stage"]),
-                        "crop_type": row["Crop_Type"],
-                        "crop_stress_indicator": int(row["Crop_Stress_Indicator"]),
+                        "nitrogen_level": float(row["Nitrogen_Level"]),
+                        "phosphorus_level": float(row["Phosphorus_Level"]),
+                        "potassium_level": float(row["Potassium_Level"]),
+                        "chlorophyll_content": float(row["Chlorophyll_Content"]),
+                        "electrochemical_signal": float(row["Electrochemical_Signal"]),
+                        "plant_health_status": row["Plant_Health_Status"],
                     }
                 )
 
